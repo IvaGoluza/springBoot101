@@ -9,8 +9,8 @@ public class DemoController {
 
     private Coach coach;  // private field - dependency injection
 
-    @Autowired  // annotation optional when having one constructor only
-    public DemoController(Coach coach) {
+    @Autowired  // use setter injection if value is optional so you want to provide default value
+    public void setCoach(Coach coach) {
         this.coach = coach;
     }
 
