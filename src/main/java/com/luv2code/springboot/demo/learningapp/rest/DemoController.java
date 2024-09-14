@@ -11,8 +11,8 @@ public class DemoController {
 
     private Coach coach;  // private field - dependency injection
 
-    @Autowired  // add qualifier if you have multiple classes implementing Coach interface
-    public DemoController(@Qualifier("cricketCoach") Coach coach) {
+    @Autowired
+    public DemoController(Coach coach) {
         this.coach = coach;
     }
 
