@@ -61,8 +61,8 @@ public class LearningappApplication {
 		//studentDAO.deleteById(2);
 
 		//delete students with lastname == Flego
-		int rowsDeleted = studentDAO.deleteByLastName("flego");
-		System.out.println("Rows deleted: " + rowsDeleted);
+		//int rowsDeleted = studentDAO.deleteByLastName("flego");
+		//System.out.println("Rows deleted: " + rowsDeleted);
 	}
 
 
