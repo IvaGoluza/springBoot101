@@ -26,11 +26,11 @@ public class DemoSecurityConfig {
         http.authorizeHttpRequests( configurer ->
                 configurer.requestMatchers(HttpMethod.GET, "/api/employees").hasRole("EMPLOYEE")
                         .requestMatchers(HttpMethod.GET, "/api/employees/**").hasRole("EMPLOYEE")
-                        .requestMatchers(HttpMethod.POST, "api/employees").hasRole("MANAGER")
-                        .requestMatchers(HttpMethod.PUT, "api/employees").hasRole("MANAGER")
-                        .requestMatchers(HttpMethod.DELETE, "api/employees/**").hasRole("ADMIN"));
+                        .requestMatchers(HttpMethod.POST, "/api/employees").hasRole("MANAGER")
+                        .requestMatchers(HttpMethod.PUT, "/api/employees").hasRole("MANAGER")
+                        .requestMatchers(HttpMethod.DELETE, "/api/employees/**").hasRole("ADMIN"));
 
-        http.httpBasic(Customizer.withDefaults());  // use basic authentication
+        http.httpBasic(Customizer.withDefaults());  // use http basic authentication
 
         // disable CSRF protection
         // ok for stateless applications, which do not rely on sessions or cookies to maintain authentication state,
