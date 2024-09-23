@@ -17,7 +17,7 @@ public class InstructorDetail {
     @Column(name="hobby")
     private String hobby;
 
-    @OneToOne(mappedBy = "instructorDetail", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH }) // mappedBy - refers to instructorDetail property in Instructor class ### cascade - if instructor detail is deleted, associated instructor will not be deleted
+    @OneToOne(mappedBy = "instructorDetail", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH }) // mappedBy - refers to instructorDetail property in Instructor class ### cascade - if instructor detail is deleted, associated instructor will not be deleted
     private Instructor instructor;
 
     public InstructorDetail() {}

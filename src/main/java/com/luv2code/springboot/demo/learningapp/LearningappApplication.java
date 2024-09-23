@@ -1,6 +1,7 @@
 package com.luv2code.springboot.demo.learningapp;
 
 import com.luv2code.springboot.demo.learningapp.dao.AppDAO;
+import com.luv2code.springboot.demo.learningapp.entity.Course;
 import com.luv2code.springboot.demo.learningapp.entity.Instructor;
 import com.luv2code.springboot.demo.learningapp.entity.InstructorDetail;
 import org.springframework.boot.CommandLineRunner;
@@ -24,9 +25,33 @@ public class LearningappApplication {
 			// findInstructor(appDAO);
 			// deleteInstructorById(appDAO);
 			// findInstructorDetail(appDAO);
-			deleteInstructorDetailById(appDAO);
+			// deleteInstructorDetailById(appDAO);
+			createInstructorWithCourses(appDAO);
 		};
 
+	}
+
+	private void createInstructorWithCourses(AppDAO appDAO) {
+
+		Instructor tempInstructor = new Instructor("Susan", "Darwin", "susan@gmail.com");
+
+		InstructorDetail tempInstructorDetail = new InstructorDetail("http://www.susan101/youtube", "elephant watching");
+
+		tempInstructor.setInstructorDetail(tempInstructorDetail);
+
+		Course course1 = new Course("course1");
+		Course course2 = new Course("course2");
+		Course course3 = new Course("course3");
+
+		tempInstructor.add(course1);
+		tempInstructor.add(course2);
+		tempInstructor.add(course3);
+
+		System.out.println("Saving instructor: " + tempInstructor);
+		System.out.println("Saving instructor detail: " + tempInstructorDetail);
+		System.out.println("Saving course: " + tempInstructor.getCourses());
+		appDAO.save(tempInstructor); // saves the courses -> used CascadeType.PERSIST
+		System.out.println("Done.");
 	}
 
 	private void deleteInstructorDetailById(AppDAO appDAO) {
