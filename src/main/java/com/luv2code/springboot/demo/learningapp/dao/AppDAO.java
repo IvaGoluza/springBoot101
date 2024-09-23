@@ -21,4 +21,10 @@ public interface AppDAO {
     void deleteInstructorDetailById(int id); // this will not delete associated instructor since CascadeType.ALL is no longer used
 
     List<Course> findCoursesByInstructorId(int id);
+
+    Course findCourseById(int id);
+
+    void update(Instructor instructor);
+
+    void update(Course course);
 }

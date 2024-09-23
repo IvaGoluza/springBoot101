@@ -25,15 +25,43 @@ public class LearningappApplication {
 		return runner -> {
 			// createInstructor(appDAO);
 			// findInstructor(appDAO);
-			// deleteInstructorById(appDAO);
+			deleteInstructorById(appDAO);
 			// findInstructorDetail(appDAO);
 			// deleteInstructorDetailById(appDAO);
 			// createInstructorWithCourses(appDAO);
 			// findInstructorWithCourses(appDAO);
 			// findCoursesForInstructor(appDAO);
-			findInstructorWithCoursesJoinFetch(appDAO);
+			// findInstructorWithCoursesJoinFetch(appDAO);
+			// updateInstructor(appDAO);
+			// updateCourse(appDAO);
 		};
 
+	}
+
+	private void updateCourse(AppDAO appDAO) {
+
+		int theId = 10;
+		System.out.println("Finding course with id " + theId);
+		Course temCourse = appDAO.findCourseById(theId);
+
+		System.out.println("Updating course with id " + temCourse.getId());
+		temCourse.setTitle("updatedCourseTitle");
+
+		appDAO.update(temCourse);
+		System.out.println("Done.");
+	}
+
+	private void updateInstructor(AppDAO appDAO) {
+
+		int theId = 1;
+		System.out.println("Finding instructor with id " + theId);
+		Instructor tempInstructor = appDAO.findInstructorById(theId);
+
+		System.out.println("Updating instructor with id " + tempInstructor.getId());
+		tempInstructor.setLastName("updatedLastName");
+
+		appDAO.update(tempInstructor);
+		System.out.println("Done.");
 	}
 
 	private void findInstructorWithCoursesJoinFetch(AppDAO appDAO) {
