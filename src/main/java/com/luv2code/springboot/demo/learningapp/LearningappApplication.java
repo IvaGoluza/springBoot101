@@ -24,9 +24,29 @@ public class LearningappApplication {
 		return runner -> {
 			// createInstructor(appDAO);
 			// findInstructor(appDAO);
-			deleteInstructorById(appDAO);
+			// deleteInstructorById(appDAO);
+			// findInstructorDetail(appDAO);
+			deleteInstructorDetailById(appDAO);
 		};
 
+	}
+
+	private void deleteInstructorDetailById(AppDAO appDAO) {
+
+		int theId = 3;
+		System.out.println("Deleting instructor details with id " + theId);
+		appDAO.deleteInstructorById(theId);
+		System.out.println("Done. Both instructor details and associated instructor have been deleted.");
+
+	}
+
+	private void findInstructorDetail(AppDAO appDAO) {
+
+		int theId = 2;
+		System.out.println("Finding instructor detail with id " + theId);
+		InstructorDetail tempInstructorDetail = appDAO.findInstructorDetailById(theId);
+		System.out.println("Found instructor details: " + tempInstructorDetail);
+		System.out.println("Because of the used bi-directional one-to-one mapping we can print out associated instructor for found instructor details: " + tempInstructorDetail.getInstructor());
 	}
 
 	private void deleteInstructorById(AppDAO appDAO) {
@@ -35,7 +55,6 @@ public class LearningappApplication {
 		System.out.println("Deleting instructor with id " + theId);
 		appDAO.deleteInstructorById(theId);
 		System.out.println("Done.");
-
 	}
 
 	private void findInstructor(AppDAO appDAO) {
