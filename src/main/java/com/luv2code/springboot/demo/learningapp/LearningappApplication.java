@@ -9,6 +9,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 
 @SpringBootApplication
 public class LearningappApplication {
@@ -26,8 +28,35 @@ public class LearningappApplication {
 			// deleteInstructorById(appDAO);
 			// findInstructorDetail(appDAO);
 			// deleteInstructorDetailById(appDAO);
-			createInstructorWithCourses(appDAO);
+			// createInstructorWithCourses(appDAO);
+			// findInstructorWithCourses(appDAO);
+			findCoursesForInstructor(appDAO);
 		};
+
+	}
+
+	private void findCoursesForInstructor(AppDAO appDAO) {
+
+		int theId = 1;
+
+		System.out.println("Finding instructor with id " + theId);
+		Instructor tempInstructor = appDAO.findInstructorById(theId); // retrieves the instructor without courses (lazy fetch)
+		System.out.println("Found instructor: " + tempInstructor);
+
+		List<Course> courses = appDAO.findCoursesByInstructorId(theId);
+
+		tempInstructor.setCourses(courses);  // BIND THE DATA!
+
+		System.out.println("Found courses: " + tempInstructor.getCourses());
+	}
+
+	private void findInstructorWithCourses(AppDAO appDAO) {
+
+		int theId = 1;
+		System.out.println("Finding instructor with id " + theId);
+		Instructor tempInstructor = appDAO.findInstructorById(theId);
+		System.out.println("Found instructor: " + tempInstructor);
+		System.out.println("Found courses: " + tempInstructor.getCourses());
 
 	}
 
