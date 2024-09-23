@@ -13,5 +13,5 @@ public interface AppDAO {
 
     InstructorDetail findInstructorDetailById(int id);
 
-    void deleteInstructorDetailById(int id); // this will delete associated instructor since CascadeType.ALL was used
+    void deleteInstructorDetailById(int id); // this will not delete associated instructor since CascadeType.ALL is no longer used
 }

@@ -8,8 +8,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.time.InstantSource;
-
 
 @SpringBootApplication
 public class LearningappApplication {
@@ -33,10 +31,10 @@ public class LearningappApplication {
 
 	private void deleteInstructorDetailById(AppDAO appDAO) {
 
-		int theId = 3;
+		int theId = 5;
 		System.out.println("Deleting instructor details with id " + theId);
 		appDAO.deleteInstructorById(theId);
-		System.out.println("Done. Both instructor details and associated instructor have been deleted.");
+		System.out.println("Done. Only instructor detail has been deleted.");
 
 	}
 
@@ -68,9 +66,9 @@ public class LearningappApplication {
 
 	private void createInstructor(AppDAO appDAO) {
 
-		Instructor tempInstructor = new Instructor("Anna", "Darwin", "anna@gmail.com");
+		Instructor tempInstructor = new Instructor("Mark", "Darwin", "mark@gmail.com");
 
-		InstructorDetail tempInstructorDetail = new InstructorDetail("http://www.anna101/youtube", "sheep watching");
+		InstructorDetail tempInstructorDetail = new InstructorDetail("http://www.mark101/youtube", "elephant watching");
 
 		tempInstructor.setInstructorDetail(tempInstructorDetail);
 
