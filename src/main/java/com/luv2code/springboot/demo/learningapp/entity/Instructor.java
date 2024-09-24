@@ -2,11 +2,12 @@ package com.luv2code.springboot.demo.learningapp.entity;
 
 import jakarta.persistence.*;
 
-@Entity
-@Table(name="employee")
-public class Employee {
+import java.util.ArrayList;
+import java.util.List;
 
-    // define fields
+@Entity
+@Table(name="instructor")
+public class Instructor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,17 +23,20 @@ public class Employee {
     @Column(name="email")
     private String email;
 
-    // define constructors
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="instructor_detail_id")
+    private InstructorDetail instructorDetail;
 
-    public Employee() {}
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "instructor", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})  // lazy fetch by default for one-to-many
+    private List<Course> courses;
 
-    public Employee(String firstName, String lastName, String email) {
+    public Instructor() {}
+
+    public Instructor(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
     }
-
-    // define getters/setters
 
     public int getId() {
         return id;
@@ -66,17 +70,41 @@ public class Employee {
         this.email = email;
     }
 
-    // define toString
+    public InstructorDetail getInstructorDetail() {
+        return instructorDetail;
+    }
 
+    public void setInstructorDetail(InstructorDetail instructorDetail) {
+        this.instructorDetail = instructorDetail;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
+    // methods for bidirectional relationship
+    public void add(Course course) {
+
+        if(courses == null) {
+            courses = new ArrayList<>();
+        }
+
+        courses.add(course);
+        course.setInstructor(this);
+    }
 
     @Override
     public String toString() {
-        return "Employee{" +
+        return "Instructor{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
+                ", instructorDetail=" + instructorDetail +
                 '}';
     }
-
 }
