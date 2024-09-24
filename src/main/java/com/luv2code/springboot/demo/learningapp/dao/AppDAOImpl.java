@@ -97,4 +97,30 @@ public class AppDAOImpl implements AppDAO{
     public void update(Course course) {
         entityManager.merge(course);
     }
+
+    @Override
+    @Transactional
+    public void save(Course course) {
+        entityManager.persist(course); // saves course and its reviews - used CascadeType.ALL
+    }
+
+    @Override
+    public Course findCourseAndReviewsById(int id) {
+
+        // have to write a query with JOIN FETCH because of the 1:n lazy fetching
+
+        TypedQuery<Course> query = entityManager.createQuery("select c from Course c JOIN FETCH c.reviews where c.id = :data", Course.class);
+        query.setParameter("data", id);
+
+        return query.getSingleResult();
+    }
+
+    @Override
+    @Transactional
+    public void deleteCourseById(int id) {
+
+        Course tempCourse = entityManager.find(Course.class, id);
+        entityManager.remove(tempCourse);
+
+    }
 }

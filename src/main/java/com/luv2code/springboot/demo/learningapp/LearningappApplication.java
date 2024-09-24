@@ -4,6 +4,7 @@ import com.luv2code.springboot.demo.learningapp.dao.AppDAO;
 import com.luv2code.springboot.demo.learningapp.entity.Course;
 import com.luv2code.springboot.demo.learningapp.entity.Instructor;
 import com.luv2code.springboot.demo.learningapp.entity.InstructorDetail;
+import com.luv2code.springboot.demo.learningapp.entity.Review;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,7 +26,7 @@ public class LearningappApplication {
 		return runner -> {
 			// createInstructor(appDAO);
 			// findInstructor(appDAO);
-			deleteInstructorById(appDAO);
+			// deleteInstructorById(appDAO);
 			// findInstructorDetail(appDAO);
 			// deleteInstructorDetailById(appDAO);
 			// createInstructorWithCourses(appDAO);
@@ -34,8 +35,44 @@ public class LearningappApplication {
 			// findInstructorWithCoursesJoinFetch(appDAO);
 			// updateInstructor(appDAO);
 			// updateCourse(appDAO);
+			// createCourseAndReviews(appDAO);
+			// retrieveCourseAndReviews(appDAO);
+			deleteCourseAndReviews(appDAO);
 		};
 
+	}
+
+	private void deleteCourseAndReviews(AppDAO appDAO) {
+
+		int theId = 10;
+
+		System.out.println("Deleting course: " + theId);
+		appDAO.deleteCourseById(theId);
+		System.out.println("Done.");
+	}
+
+	private void retrieveCourseAndReviews(AppDAO appDAO) {
+
+		int theId = 10;
+
+		Course course = appDAO.findCourseAndReviewsById(theId);
+
+		System.out.println(course);
+		System.out.println(course.getReviews());
+	}
+
+	private void createCourseAndReviews(AppDAO appDAO) {
+
+		Course course = new Course("course1");
+
+		course.addReview(new Review("review1"));
+		course.addReview(new Review("review2"));
+		course.addReview(new Review("review3"));
+
+		System.out.println("Saving course: " + course);
+		System.out.println("Saving course reviews: " + course.getReviews());
+		appDAO.save(course);
+		System.out.println("Done.");
 	}
 
 	private void updateCourse(AppDAO appDAO) {
