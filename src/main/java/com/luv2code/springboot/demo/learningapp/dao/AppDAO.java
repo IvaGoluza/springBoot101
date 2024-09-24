@@ -3,6 +3,7 @@ package com.luv2code.springboot.demo.learningapp.dao;
 import com.luv2code.springboot.demo.learningapp.entity.Course;
 import com.luv2code.springboot.demo.learningapp.entity.Instructor;
 import com.luv2code.springboot.demo.learningapp.entity.InstructorDetail;
+import com.luv2code.springboot.demo.learningapp.entity.Student;
 
 import java.util.List;
 
@@ -33,4 +34,12 @@ public interface AppDAO {
     Course findCourseAndReviewsById(int id);
 
     void deleteCourseById(int id);
+
+    Course findCourseAndStudentsByCourseId(int id);
+
+    Student findStudentAndCoursesByStudentId(int id);
+
+    void update(Student student);
+
+    void deleteStudentById(int id);
 }
