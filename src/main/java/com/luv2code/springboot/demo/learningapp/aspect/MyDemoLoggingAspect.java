@@ -13,7 +13,17 @@ public class MyDemoLoggingAspect {
     @Pointcut("execution(* com.luv2code.springboot.demo.learningapp.dao.*.*(..))")
     private void forDaoPackage() {}
 
-    @Before("forDaoPackage()")
+    @Pointcut("execution(* com.luv2code.springboot.demo.learningapp.dao.*.get*(..))")
+    private void getter() {}
+
+    @Pointcut("execution(* com.luv2code.springboot.demo.learningapp.dao.*.set*(..))")
+    private void setter() {}
+
+    // combine pointcut
+    @Pointcut("forDaoPackage() && !getter() && !setter()")
+    private void forDaoPackageNotGetterSetter() {}
+
+    @Before("forDaoPackageNotGetterSetter()")
     public void beforeAddAccountAdvice() {
         System.out.println("=========== Executing Before Advice on addAccount() ==========");
     }
