@@ -81,20 +81,22 @@ public class MyDemoLoggingAspect {
 
         try {
             result = proceedingJoinPoint.proceed();  // start the method!
+
+            long endTime = System.currentTimeMillis();
+            long elapsedTime = endTime - startTime;
+
+            System.out.println("Elapsed time: " + elapsedTime / 1000.0 + " s");
+
+            return result;
+
         } catch (Exception e) {
 
             System.out.println("@Around advice - Exception: " + e);
-            // handle and give default fortune
-            result = "No fortune for you today.";
+
+            // rethrow exception
+            throw e;
         }
 
-        long endTime = System.currentTimeMillis();
-
-        long elapsedTime = endTime - startTime;
-
-        System.out.println("Elapsed time: " + elapsedTime / 1000.0 + " s");
-
-        return result; // have to return the result!
     }
 
 }
