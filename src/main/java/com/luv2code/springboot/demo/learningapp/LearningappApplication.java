@@ -36,7 +36,7 @@ public class LearningappApplication {
 	private void demoTheAroundAdvice(TrafficFortuneService trafficFortuneService) {
 
 		System.out.println("Main program: demoTheAroundAdvice. Calling getFortune().");
-		boolean trip = true;
+		boolean trip = false;  // set to true to simulate exception handling
 
         try {
             String data = trafficFortuneService.getFortune(trip);
