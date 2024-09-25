@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyDemoLoggingAspect {
 
-    // POINTCUT EXP: run this code before any target-object method whose name starts with "add" (in any class)
-    @Before("execution(public void add*())")
+    // POINTCUT EXP: run this code before any target-object method whose name starts with "add" (in any class and with any return type)
+    @Before("execution(* add*())")
     public void beforeAddAccountAdvice() {
         System.out.println("=========== Executing Before Advice on addAccount() ==========");
     }
