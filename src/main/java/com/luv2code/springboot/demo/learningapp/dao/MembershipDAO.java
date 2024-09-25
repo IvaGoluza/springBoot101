@@ -1,6 +1,6 @@
 package com.luv2code.springboot.demo.learningapp.dao;
 
-public interface AccountDAO {
+public interface MembershipDAO {
 
     void addAccount();
 
