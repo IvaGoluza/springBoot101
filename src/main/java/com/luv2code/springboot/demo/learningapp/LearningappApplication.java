@@ -36,10 +36,10 @@ public class LearningappApplication {
 	private void demoTheAroundAdvice(TrafficFortuneService trafficFortuneService) {
 
 		System.out.println("Main program: demoTheAroundAdvice. Calling getFortune().");
-
+		boolean trip = true;
 
         try {
-            String data = trafficFortuneService.getFortune();
+            String data = trafficFortuneService.getFortune(trip);
 			System.out.println("Main program: " + data);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);

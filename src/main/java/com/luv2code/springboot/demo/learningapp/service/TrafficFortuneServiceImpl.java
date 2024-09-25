@@ -8,7 +8,9 @@ import java.util.concurrent.TimeUnit;
 public class TrafficFortuneServiceImpl implements TrafficFortuneService {
 
     @Override
-    public String getFortune() {
+    public String getFortune(boolean trip) {
+
+        if (trip) throw new RuntimeException("Oh not again...");
 
         try {
             TimeUnit.SECONDS.sleep(5);

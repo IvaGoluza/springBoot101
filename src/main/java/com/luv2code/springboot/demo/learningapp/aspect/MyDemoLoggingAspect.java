@@ -77,7 +77,16 @@ public class MyDemoLoggingAspect {
 
         long startTime = System.currentTimeMillis();
 
-        Object result = proceedingJoinPoint.proceed();  // start the method!
+        Object result = null;
+
+        try {
+            result = proceedingJoinPoint.proceed();  // start the method!
+        } catch (Exception e) {
+
+            System.out.println("@Around advice - Exception: " + e);
+            // handle and give default fortune
+            result = "No fortune for you today.";
+        }
 
         long endTime = System.currentTimeMillis();
 
