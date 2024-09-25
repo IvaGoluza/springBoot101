@@ -2,6 +2,7 @@ package com.luv2code.springboot.demo.learningapp.aspect;
 
 import com.luv2code.springboot.demo.learningapp.Account;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
@@ -66,6 +67,25 @@ public class MyDemoLoggingAspect {
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         System.out.println("MethodSignature: " + methodSignature);
 
+    }
+
+
+    @Around("execution(* com.luv2code.springboot.demo.learningapp.service.*.getFortune(..))")
+    public Object aroundGetFortuneAdvice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+
+        System.out.println("=========== Executing Around Advice ==========");
+
+        long startTime = System.currentTimeMillis();
+
+        Object result = proceedingJoinPoint.proceed();  // start the method!
+
+        long endTime = System.currentTimeMillis();
+
+        long elapsedTime = endTime - startTime;
+
+        System.out.println("Elapsed time: " + elapsedTime / 1000.0 + " s");
+
+        return result; // have to return the result!
     }
 
 }
