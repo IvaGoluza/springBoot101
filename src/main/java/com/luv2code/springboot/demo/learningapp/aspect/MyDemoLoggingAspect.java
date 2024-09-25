@@ -1,6 +1,7 @@
 package com.luv2code.springboot.demo.learningapp.aspect;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -25,8 +26,15 @@ public class MyDemoLoggingAspect {
             System.out.println("arg: " + arg);
         }
 
-        System.out.println("======================================================");
+    }
 
+    @AfterReturning(
+            pointcut = "execution(* com.luv2code.springboot.demo.learningapp.dao.AccountDAO.findAccounts(..))" ,
+            returning = "results"
+    )
+    public void afterAddAccountAdvice(JoinPoint joinPoint, Object results) {
+        System.out.println("=========== Executing AfterReturning Advice on addAccount() ==========");
+        System.out.println("Results: " + results);
     }
 
 }
