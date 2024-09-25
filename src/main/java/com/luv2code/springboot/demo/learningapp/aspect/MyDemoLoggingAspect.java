@@ -1,5 +1,6 @@
 package com.luv2code.springboot.demo.learningapp.aspect;
 
+import com.luv2code.springboot.demo.learningapp.Account;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -7,6 +8,8 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Aspect
 @Component
@@ -32,9 +35,14 @@ public class MyDemoLoggingAspect {
             pointcut = "execution(* com.luv2code.springboot.demo.learningapp.dao.AccountDAO.findAccounts(..))" ,
             returning = "results"
     )
-    public void afterAddAccountAdvice(JoinPoint joinPoint, Object results) {
+    public void afterAddAccountAdvice(JoinPoint joinPoint, List<Account> results) {
         System.out.println("=========== Executing AfterReturning Advice on addAccount() ==========");
-        System.out.println("Results: " + results);
+
+        if (!results.isEmpty()) {
+            Account account = results.get(0);
+            account.setName("Updated name inside AfterReturning advice");
+        }
+
     }
 
 }
