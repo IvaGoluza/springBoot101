@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyDemoLoggingAspect {
 
-    // POINTCUT EXP: run this code before target-object method with given signature in the specified class
-    @Before("execution(public void com.luv2code.springboot.demo.learningapp.dao.AccountDAO.addAccount())")
+    // POINTCUT EXP: run this code before any target-object method whose name starts with "add" (in any class)
+    @Before("execution(public void add*())")
     public void beforeAddAccountAdvice() {
         System.out.println("=========== Executing Before Advice on addAccount() ==========");
     }
