@@ -22,13 +22,29 @@ public class LearningappApplication {
 
 		return runner -> {
 			// demoTheBeforeAdvice(accountDAO, membershipDAO);
-			demoTheAfterReturnAdvice(accountDAO);
+			// demoTheAfterReturnAdvice(accountDAO);
+			demoTheAfterThrowingAdvice(accountDAO);
 		};
 
 	}
 
+	private void demoTheAfterThrowingAdvice(AccountDAO accountDAO) {
+		List<Account> accounts = null;
+
+		try {
+			// add a boolean flag to simulate exc
+			boolean trip = true;
+			accounts = accountDAO.findAccounts(trip);
+		} catch (Exception e) {
+			System.out.println("Main program: " + e.getMessage());
+		}
+
+		System.out.println("Main program. Accounts:");
+		System.out.println(accounts);
+	}
+
 	private void demoTheAfterReturnAdvice(AccountDAO accountDAO) {
-		List<Account> accounts = accountDAO.findAccounts();
+		List<Account> accounts = accountDAO.findAccounts(false);
 
 		System.out.println("Main program. Accounts:");
 		System.out.println(accounts);

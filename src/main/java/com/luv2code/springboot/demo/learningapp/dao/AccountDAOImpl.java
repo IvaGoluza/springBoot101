@@ -14,7 +14,9 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     @Override
-    public List<Account> findAccounts() {
+    public List<Account> findAccounts(boolean trip) {
+
+        if (trip) throw new RuntimeException("Oh no, I fell...again...silly me...");
 
         Account account1 = new Account("account1", "1");
         Account account2 = new Account("account2", "2");

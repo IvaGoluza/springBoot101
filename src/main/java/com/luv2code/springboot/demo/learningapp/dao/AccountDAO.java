@@ -8,6 +8,6 @@ public interface AccountDAO {
 
     void addAccount(Account account, boolean vip);
 
-    List<Account> findAccounts();
+    List<Account> findAccounts(boolean trip);
 
 }
