@@ -26,7 +26,7 @@ public class LearningappApplication {
 
 	private void demoTheBeforeAdvice(AccountDAO accountDAO, MembershipDAO membershipDAO) {
 
-		accountDAO.addAccount();
+		accountDAO.addAccount(new Account("accountName", "accountLevel"));
 		membershipDAO.addMember();
 	}
 
